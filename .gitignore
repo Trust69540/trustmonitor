@@ -1,0 +1,40 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.db
+backend/uploads/
+*.pyc
+
+# Node / Expo
+mobile/node_modules/
+mobile/*/node_modules/
+mobile/.expo/
+mobile/*/.expo/
+
+# Env / secrets
+*.env
+.env
+.env.local
+
+# OS
+.DS_Store
+
+# Old/unused scaffolding
+mobile/trustmonitor-mobile-broken/
+mobile/src/
+mobile/App.tsx
+mobile/index.ts
+mobile/package.json
+mobile/package-lock.json
+mobile/tsconfig.json
+mobile/app.json
+mobile/CLAUDE.md
+mobile/AGENTS.md
+mobile/LICENSE
+mobile/assets/
+
+# Databases
+*.db
+
+# Editor/backup files
+*.bak
