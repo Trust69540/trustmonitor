@@ -385,15 +385,16 @@ async def create_rapport(
 
 @app.get("/debug-db")
 def debug_db():
-    import os
+    import os, re
     url = os.environ.get("DATABASE_URL", "NOT SET")
-    masked = url[:25] + "..." + url[-25:] if len(url) > 50 else url
+    masked = re.sub(r"://([^:]+):([^@]+)@", r"://\1:HIDDEN@", url)
     from database import SessionLocal, Projet, User
     db = SessionLocal()
     try:
         project_count = db.query(Projet).count()
         user_count = db.query(User).count()
-        return {"database_url_masked": masked, "project_count": project_count, "user_count": user_count}
+        projet_ids = [p.id for p in db.query(Projet).all()]
+        return {"database_url_masked": masked, "project_count": project_count, "user_count": user_count, "projet_ids": projet_ids}
     except Exception as e:
         return {"database_url_masked": masked, "error": str(e)}
     finally:
