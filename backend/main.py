@@ -399,3 +399,15 @@ def debug_db():
         return {"database_url_masked": masked, "error": str(e)}
     finally:
         db.close()
+
+
+@app.post("/debug-write-probe")
+def debug_write_probe():
+    from database import SessionLocal, Projet
+    db = SessionLocal()
+    p = Projet(nom="PROBE_TEST_XYZ", bailleur="debug", statut="actif")
+    db.add(p)
+    db.commit()
+    db.refresh(p)
+    db.close()
+    return {"created_id": p.id}
