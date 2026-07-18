@@ -2,7 +2,8 @@ from datetime import datetime, timedelta
 from jose import jwt
 from passlib.context import CryptContext
 
-SECRET_KEY = "change-this-to-a-random-string-later"  # ok for MVP, must change before real use
+import os
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "change-this-to-a-random-string-later")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24h, generous for demo/testing
 
