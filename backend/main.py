@@ -381,3 +381,20 @@ async def create_rapport(
         "statut": rapport.statut,
         "image_url": rapport.image_url,
     }
+
+
+@app.get("/debug-db")
+def debug_db():
+    import os
+    url = os.environ.get("DATABASE_URL", "NOT SET")
+    masked = url[:25] + "..." + url[-25:] if len(url) > 50 else url
+    from database import SessionLocal, Projet, User
+    db = SessionLocal()
+    try:
+        project_count = db.query(Projet).count()
+        user_count = db.query(User).count()
+        return {"database_url_masked": masked, "project_count": project_count, "user_count": user_count}
+    except Exception as e:
+        return {"database_url_masked": masked, "error": str(e)}
+    finally:
+        db.close()
