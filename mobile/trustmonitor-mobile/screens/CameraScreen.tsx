@@ -74,7 +74,6 @@ export default function CameraScreen({ navigation, route }) {
       }
 
       const extracted = await res.json();
-      if (extracted._error) { showAlert("Erreur IA (debug)", String(extracted._error)); }
       navigation.navigate("AICorrection", { reportData, photoUri, extracted });
     } catch (err) {
       showAlert("Erreur réseau", "Impossible d'analyser la photo.");

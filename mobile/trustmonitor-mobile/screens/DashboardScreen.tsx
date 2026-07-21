@@ -132,7 +132,7 @@ export default function DashboardScreen({ navigation }) {
             </View>
           )}
 
-          {role === "administrateur" && stats && (
+          {role === "admin" && stats && (
             <View>
               <Text style={styles.stat}>Utilisateurs : {stats.utilisateurs}</Text>
               <Text style={styles.stat}>Projets : {stats.projets}</Text>
